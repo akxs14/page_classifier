@@ -24,7 +24,7 @@ require_relative 'file_manager'
     def select_input_instance input_type
       case input_type
       when :file
-        @input_manager_instance = IOManager::FileManager.new
+        @input_manager_instance = FileManager.new
       end
     end
 
