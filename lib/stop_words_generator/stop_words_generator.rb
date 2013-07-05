@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 class StopWordsGenerator
 
   def initialize input_folder = "../../spec/stop_words_gen_input"
@@ -11,6 +10,7 @@ class StopWordsGenerator
   def create_stop_word_dict
     files = list_input_files
     files.each do |file|
+      puts "reading file #{file}"
       read_input_file file
     end
 
@@ -23,7 +23,7 @@ class StopWordsGenerator
   def save_stop_words_in_file
     f = File.open("stop_words.txt", "w")
     @word_frequencies.each do |k,v|
-      # puts "#{k}, #{v[:frequency]}\n"
+      puts "#{k}, #{v[:frequency]}\n"
       f.write("#{k}, #{v[:frequency]}\n")
     end
   end
@@ -94,7 +94,7 @@ class StopWordsGenerator
   end
 
   def split_line line
-    line.split(/[ \*\-?\t.,;\r\n\]\[\|\)\(\"\'\\\/:$!<>]/)
+    line.split(/[ _=\*\-?\t.,;\r\n\]\[\|\)\(\"\'\\\/:$!<>]/)
   end
 
 end
