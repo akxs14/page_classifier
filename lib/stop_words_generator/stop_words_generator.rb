@@ -4,7 +4,7 @@ class StopWordsGenerator
   def initialize input_folder = "../../spec/stop_words_gen_input"
     @input_folder, @word_count = input_folder, 0
     @word_dictionary, @word_frequencies = {}, {}
-    @stop_word_frequency_threshold = 0.0001
+    @stop_word_frequency_threshold = 0.0005
   end
 
   def create_stop_word_dict
@@ -20,15 +20,23 @@ class StopWordsGenerator
     save_stop_words_in_file
   end
 
-  def save_stop_words_in_file dictionary_file = "stop_words.txt"
-    f = File.open(dictionary_file, "w")
-    @word_frequencies.each do |k,v|
-      puts "#{k}, #{v[:frequency]}\n"
-      f.write("#{k}, #{v[:frequency]}\n")
+  def load_stop_words_dict file_name = "stop_words.txt"
+    stop_words_hash = {}
+    File.open(file_name, "r").each do |line|
+      words = line.split(",")
+      stop_words_hash[words[0]] = words[1].to_f
     end
+    stop_words_hash
   end
 
   private
+
+  def save_stop_words_in_file dictionary_file = "stop_words.txt"
+    f = File.open(dictionary_file, "w")
+    @word_frequencies.each do |k,v|
+      f.write("#{k}, #{v[:frequency]}\n")
+    end
+  end
 
   def list_input_files
     files = []
