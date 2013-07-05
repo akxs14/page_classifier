@@ -20,8 +20,8 @@ class StopWordsGenerator
     save_stop_words_in_file
   end
 
-  def save_stop_words_in_file
-    f = File.open("stop_words.txt", "w")
+  def save_stop_words_in_file dictionary_file = "stop_words.txt"
+    f = File.open(dictionary_file, "w")
     @word_frequencies.each do |k,v|
       puts "#{k}, #{v[:frequency]}\n"
       f.write("#{k}, #{v[:frequency]}\n")
