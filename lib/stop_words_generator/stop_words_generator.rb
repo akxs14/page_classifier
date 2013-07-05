@@ -28,11 +28,6 @@ class StopWordsGenerator
     end
   end
 
-  def save_stop_words_in_db
-
-  end
-
-
   private
 
   def list_input_files
